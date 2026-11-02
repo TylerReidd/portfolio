@@ -1,23 +1,16 @@
+import ProjectGallery from './ProjectGallery'
+
 function ProjectCard({ project }) {
   if (!project.title) return null
 
   const imageList = Array.isArray(project.images) ? project.images : project.images ? [project.images] : []
-  const imageSrc = imageList[0] || ''
+  const images = imageList.map((image) => typeof image === 'string'
+    ? { src: image, alt: `${project.title} project screenshot` }
+    : image)
 
   return (
     <article className="project-card">
-      {imageSrc ? (
-        <div className="project-image">
-          <img src={imageSrc} alt={`${project.title} project screenshot`} />
-        </div>
-      ) : (
-        <div
-          className="project-image"
-          aria-label={`${project.title} project screenshot placeholder`}
-        >
-          <span>Project screenshot</span>
-        </div>
-      )}
+      <ProjectGallery title={project.title} images={images} />
       <div className="project-card-body">
         <p className="project-kicker">{project.subtitle}</p>
         <h3>{project.title}</h3>

@@ -2,13 +2,14 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import SectionIntro from '../components/SectionIntro'
 import ProjectCard from '../components/ProjectCard'
+import ContactForm from '../components/ContactForm'
 import { projects, services, siteConfig } from '../data/content'
 
 function HomePage() {
   return (
     <div className="site-shell">
       <Header />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="hero page-section">
           <div className="hero-copy">
             <p className="eyebrow">Tyler Reid <span>/</span> Independent technical partner</p>
@@ -45,7 +46,7 @@ function HomePage() {
 
         <section className="page-section work-section" id="work">
           <SectionIntro eyebrow="A small selection" title="Selected Work">
-            <p>One project, carefully documented. More work will be added as it is ready to show.</p>
+            <p>Tools built around teaching, learning, and practice. Explore the projects below to see how they work.</p>
           </SectionIntro>
           <div className="project-grid">{projects.map((project, index) => <ProjectCard project={project} key={project.title || index} />)}</div>
         </section>
@@ -78,13 +79,7 @@ function HomePage() {
         <section className="page-section contact-section" id="contact">
           <SectionIntro eyebrow="Start a conversation" title="Tell Me What You Need"><p>A short note is enough. I'll reply with next steps and a clear sense of whether I'm the right fit.</p></SectionIntro>
           <div className="contact-layout">
-            <form className="contact-form" action="" method="post">
-              <div className="form-row"><label>Name<input type="text" name="name" autoComplete="name" required /></label><label>Email<input type="email" name="email" autoComplete="email" required /></label></div>
-              <label>Type of project<select name="projectType" defaultValue=""><option value="" disabled>Select one</option><option>Website / technical help</option><option>Guitar lessons</option><option>Other</option></select></label>
-              <label>Tell me a little about what you're looking for.<textarea name="message" rows="6" required></textarea></label>
-              <button className="button button-dark" type="submit">Send inquiry <span aria-hidden="true">↗</span></button>
-              <p className="form-note">Form endpoint can be added to this form action when you choose a service such as Formspree or Netlify Forms.</p>
-            </form>
+            <ContactForm />
             <aside className="contact-aside"><p>Prefer email?</p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a><span>{siteConfig.location}</span></aside>
           </div>
         </section>
